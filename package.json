@@ -1,0 +1,17 @@
+{
+  "name": "geometry-tutor-app",
+  "version": "1.0.0",
+  "description": "An honors geometry tutor webapp for 9th grade students with daily lessons and quizzes",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": ["geometry", "education", "tutor", "mobile"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

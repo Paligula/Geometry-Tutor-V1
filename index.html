@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Honors Geometry Tutor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Honors Geometry</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="progress-text" id="progressText">Lesson 1 of 20</p>
+        </header>
+
+        <!-- Floating Navigation Arrows -->
+        <button class="nav-arrow nav-arrow-left" id="floatingPrevBtn" title="Previous Lesson">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button class="nav-arrow nav-arrow-right" id="floatingNextBtn" title="Next Lesson">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Lesson View -->
+            <div class="lesson-view" id="lessonView">
+                <h2 class="lesson-title" id="lessonTitle"></h2>
+
+                <div class="lesson-content" id="lessonContent">
+                    <!-- Lesson content will be dynamically loaded here -->
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" id="prevBtn" disabled>Previous</button>
+                    <button class="btn btn-primary" id="nextBtn">Next</button>
+                </div>
+            </div>
+
+            <!-- Quiz View -->
+            <div class="quiz-view hidden" id="quizView">
+                <h2>Lesson Quiz</h2>
+                <div class="quiz-progress" id="quizProgress"></div>
+
+                <div class="quiz-question" id="quizQuestion">
+                    <p class="question-text" id="questionText"></p>
+                    <div class="answers" id="answersContainer"></div>
+                </div>
+
+                <div class="quiz-feedback hidden" id="quizFeedback">
+                    <p id="feedbackText"></p>
+                    <button class="btn btn-primary" id="nextQuestionBtn">Next Question</button>
+                </div>
+
+                <div class="quiz-results hidden" id="quizResults">
+                    <h3>Quiz Complete!</h3>
+                    <p class="score" id="scoreText"></p>
+                    <p class="score-message" id="scoreMessage"></p>
+                    <div class="results-buttons">
+                        <button class="btn btn-secondary" id="reviewBtn">Review Lesson</button>
+                        <button class="btn btn-primary" id="nextLessonBtn">Next Lesson</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Flashcard View -->
+        <div class="flashcard-view hidden" id="flashcardView">
+            <h2>Flashcard Review</h2>
+            <div class="flashcard-progress" id="flashcardProgress"></div>
+
+            <div class="flashcard-container">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>Question</h3>
+                        <p id="flashcardFront"></p>
+                    </div>
+                    <div class="flashcard-back">
+                        <h3>Answer</h3>
+                        <p id="flashcardBack"></p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="flashcard-source" id="flashcardSource"></p>
+
+            <div class="flashcard-buttons">
+                <button class="btn btn-secondary" id="closeFlashcardBtn">Exit</button>
+                <button class="btn btn-primary" id="flipCardBtn">Flip Card</button>
+                <button class="btn btn-primary" id="nextCardBtn">Next Card</button>
+            </div>
+        </div>
+
+        <!-- Practice Problems View -->
+        <div class="practice-view hidden" id="practiceView">
+            <div class="practice-header">
+                <h2>Practice Problems</h2>
+                <button class="btn-close" id="closePracticeBtn">&times;</button>
+            </div>
+            <div class="practice-problems-container" id="practiceProblemsContainer">
+                <!-- Practice problems will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Lesson List Menu -->
+        <div class="lesson-menu hidden" id="lessonMenu">
+            <div class="menu-header">
+                <h2>All Lessons</h2>
+                <button class="btn-close" id="closeMenuBtn">&times;</button>
+            </div>
+            <div class="lesson-list" id="lessonList"></div>
+            <div class="menu-footer">
+                <button class="btn btn-secondary btn-block" id="resetProgressBtn">Reset Progress</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <button class="btn-icon" id="menuBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                Lessons
+            </button>
+            <button class="btn-icon" id="quizBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                </svg>
+                Quiz
+            </button>
+            <button class="btn-icon" id="practiceBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                </svg>
+                Practice
+            </button>
+            <button class="btn-icon" id="flashcardBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                    <path d="M9 9h6"></path>
+                    <path d="M9 15h6"></path>
+                </svg>
+                Cards
+            </button>
+            <button class="btn-icon" id="printBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Print
+            </button>
+        </footer>
+    </div>
+
+    <script src="lessons.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
